@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Rock+Salt&text=0123456789" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="./js/moment.js"></script>
+
+  <style>
+  
+    body {
+      background-color: #3E6A36;
+      font-size: 16px;
+    }
+
+    header {
+      color: #FAFCFA;
+    }
+
+    header .course_name {
+      float: left;
+      text-align: left;
+      width: 50%;
+    }
+
+/*
+    header .course_name::-webkit-input-placeholder,
+    header .course_name::-moz-placeholder,
+    header .course_name:-ms-input-placeholder,
+    header .course_name:-moz-placeholder {
+      color: pink;
+    }
+*/
+
+    header .course_name:placeholder-shown {
+      color: black;
+    }
+
+    header .date {
+      float: right;
+      text-align: right;
+      width: 40%;
+    }
+
+    table {
+      border-collapse: collapse;
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    table div {
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid black;
+      height: 7vh;
+    }
+
+    .hole {
+      background-color: #102B1D;
+      color: #FAFCFA;
+    }
+
+    .par {
+      background-color: #BEED7B;
+      color: #102B1D;
+    }
+
+    .player {
+      background-color: #FAFCFA;
+      color: #102B1D;
+    }
+
+    input {
+      background: transparent;
+      border: 0;
+      width: 100%;
+      height: 6vh;
+      text-align: center;
+      font-size: inherit;
+      font-weight: inherit;
+      color: inherit;
+    }
+
+    .hwrite {
+      background-color: #FAFCFA;
+      color: #102B1D;
+      font-family: 'Rock Salt', cursive;
+    }
+
+    .hwrite input {
+      color: inherit;
+      font-family: inherit;
+    }
+
+  </style>
+
+  <script>
+  
+    angular.module('app', [])
+      .controller('ScoreCtrl', function ($scope) {
+
+      $scope.course_name = "";
+
+      $scope.date = moment().format("YYYY-MM-DD");
+
+      $scope.header = {
+        hole: "Hole",
+        par: "Par",
+        player1: "",
+        player2: "",
+        player3: "",
+        player4: "",
+      };
+
+      $scope.holes = [];
+      for (var i = 0; i < 9; i++) {
+        $scope.holes.push({
+          hole: i + 1,
+          par: 3,
+          player1: null,
+          player2: null,
+          player3: null,
+          player4: null,
+        });
+      }
+
+      $scope.footer = {
+        hole: "",
+        par: function () {
+          return $scope.holes
+            .map(function (h) {return _parseIntEx(h.par)})
+            .reduce(function (prev, current) {return prev + current;});
+        },
+        player1: function () {
+          return $scope.holes
+            .map(function (h) {return _parseIntEx(h.player1)})
+            .reduce(function (prev, current) {return prev + current;});
+        },
+        player2: function () {
+          return $scope.holes
+            .map(function (h) {return _parseIntEx(h.player2)})
+            .reduce(function (prev, current) {return prev + current;});
+        },
+        player3: function () {
+          return $scope.holes
+            .map(function (h) {return _parseIntEx(h.player3)})
+            .reduce(function (prev, current) {return prev + current;});
+        },
+        player4: function () {
+          return $scope.holes
+            .map(function (h) {return _parseIntEx(h.player4)})
+            .reduce(function (prev, current) {return prev + current;});
+        },
+      };
+
+      var _parseIntEx = function (val) {
+        return val == null ? 0 : parseInt(val);
+      }
+
+    });
+
+  </script>
+
+</head>
+
+<body>
+
+  <div ng-app="app" ng-controller="ScoreCtrl">
+
+    <header>
+      <input type="text" class="course_name" ng-model="course_name" placeholder="Scoa Golf Club">
+      <input type="text" class="date" ng-model="date" readonly>
+    <header>
+
+    <table>
+
+      <tr>
+        <th class="hole">
+          <div>
+            <input type="text" ng-model="header.hole" readonly>
+          </div>
+        </th>
+        <th class="par">
+          <div>
+            <input type="text" ng-model="header.par" readonly>
+          </div>
+        </th>
+        <th class="player">
+          <div>
+            <input type="text" ng-model="header.player1" placeholder="YOU">
+          </div>
+        </th>
+        <th class="player">
+          <div>
+            <input type="text" ng-model="header.player2">
+          </div>
+        </th>
+        <th class="player">
+          <div>
+            <input type="text" ng-model="header.player3">
+          </div>
+        </th>
+        <th class="player">
+          <div>
+            <input type="text" ng-model="header.player4">
+          </div>
+        </th>
+      </tr>
+
+      <tr ng-repeat="h in holes">
+        <th class="hole">
+          <div>
+            <input type="number" ng-model="h.hole" readonly>
+          </div>
+        </th>
+        <th class="par">
+          <div>
+            <input type="number" ng-model="h.par" min="0" max="99">
+          </div>
+        </th>
+        <td class="hwrite">
+          <div>
+            <input type="number" ng-model="h.player1" min="0" max="99">
+          </div>
+        </td>
+        <td class="hwrite">
+          <div>
+            <input type="number" ng-model="h.player2" min="0" max="99">
+          </div>
+        </td>
+        <td class="hwrite">
+          <div>
+            <input type="number" ng-model="h.player3" min="0" max="99">
+          </div>
+        </td>
+        <td class="hwrite">
+          <div>
+            <input type="number" ng-model="h.player4" min="0" max="99">
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <th class="hole">
+          <div>
+            {{footer.hole}}
+          </div>
+        </th>
+        <th class="par">
+          <div>
+            {{footer.par()}}
+          </div>
+        </th>
+        <th class="hwrite">
+          <div ng-style="{color: footer.player1() > 0 ? 'inherit' : 'transparent'}">
+            {{footer.player1()}}
+          </div>
+        </th>
+        <th class="hwrite">
+          <div ng-style="{color: footer.player2() > 0 ? 'inherit' : 'transparent'}">
+            {{footer.player2()}}
+          </div>
+        </th>
+        <th class="hwrite">
+          <div ng-style="{color: footer.player3() > 0 ? 'inherit' : 'transparent'}">
+            {{footer.player3()}}
+          </div>
+        </th>
+        <th class="hwrite">
+          <div ng-style="{color: footer.player4() > 0 ? 'inherit' : 'transparent'}">
+            {{footer.player4()}}
+          </div>
+        </th>
+      </tr>
+
+    </table>
+
+  </div>
+
+</body>
+
+</html>
