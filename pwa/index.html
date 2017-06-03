@@ -30,15 +30,6 @@
       width: 50%;
     }
 
-/*
-    header .course_name::-webkit-input-placeholder,
-    header .course_name::-moz-placeholder,
-    header .course_name:-ms-input-placeholder,
-    header .course_name:-moz-placeholder {
-      color: pink;
-    }
-*/
-
     header .course_name:placeholder-shown {
       color: black;
     }
@@ -84,8 +75,9 @@
     input {
       background: transparent;
       border: 0;
-      width: 13vw;
-      height: 6vh;
+      outline: none;
+      width: 9vw;
+      height: 5vh;
       text-align: center;
       font-size: inherit;
       font-weight: inherit;
@@ -198,22 +190,22 @@
         </th>
         <th class="player">
           <div>
-            <input type="text" ng-model="header.player1" placeholder="YOU">
+            <input type="text" ng-model="header.player1" maxlength="4" placeholder="YOU">
           </div>
         </th>
         <th class="player">
           <div>
-            <input type="text" ng-model="header.player2">
+            <input type="text" ng-model="header.player2" maxlength="4">
           </div>
         </th>
         <th class="player">
           <div>
-            <input type="text" ng-model="header.player3">
+            <input type="text" ng-model="header.player3" maxlength="4">
           </div>
         </th>
         <th class="player">
           <div>
-            <input type="text" ng-model="header.player4">
+            <input type="text" ng-model="header.player4" maxlength="4">
           </div>
         </th>
       </tr>
@@ -226,27 +218,27 @@
         </th>
         <th class="par">
           <div>
-            <input type="number" ng-model="h.par" min="0" max="99">
+            <input type="tel" ng-model="h.par" inputmode="numeric" maxlength="2">
           </div>
         </th>
         <td class="hwrite">
           <div>
-            <input type="number" ng-model="h.player1" min="0" max="99">
+            <input type="tel" ng-model="h.player1" inputmode="numeric" maxlength="2">
           </div>
         </td>
         <td class="hwrite">
           <div>
-            <input type="number" ng-model="h.player2" min="0" max="99">
+            <input type="tel" ng-model="h.player2" inputmode="numeric" maxlength="2">
           </div>
         </td>
         <td class="hwrite">
           <div>
-            <input type="number" ng-model="h.player3" min="0" max="99">
+            <input type="tel" ng-model="h.player3" inputmode="numeric" maxlength="2">
           </div>
         </td>
         <td class="hwrite">
           <div>
-            <input type="number" ng-model="h.player4" min="0" max="99">
+            <input type="tel" ng-model="h.player4" inputmode="numeric" maxlength="2">
           </div>
         </td>
       </tr>
