@@ -16,6 +16,7 @@
   
     body {
       background-color: #3E6A36;
+      background-image: url("./img/app-bg.jpg");
       font-size: 16px;
     }
 
@@ -62,6 +63,7 @@
       border: 1px solid black;
       height: 7vh;
       text-align: center;
+      opacity: 0.8;
     }
 
     .hole {
@@ -82,7 +84,7 @@
     input {
       background: transparent;
       border: 0;
-      width: 100%;
+      width: 13vw;
       height: 6vh;
       text-align: center;
       font-size: inherit;
@@ -108,7 +110,7 @@
     angular.module('app', [])
       .controller('ScoreCtrl', function ($scope) {
 
-      $scope.course_name = "";
+      $scope.course_name = "Scoa Golf Club";
 
       $scope.date = moment().format("YYYY-MM-DD");
 
@@ -177,7 +179,7 @@
   <div ng-app="app" ng-controller="ScoreCtrl">
 
     <header>
-      <input type="text" class="course_name" ng-model="course_name" placeholder="Scoa Golf Club">
+      <input type="text" class="course_name" ng-model="course_name">
       <input type="text" class="date" ng-model="date" readonly>
     <header>
 
