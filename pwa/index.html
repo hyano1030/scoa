@@ -8,9 +8,10 @@
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#3E6A36">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Scoa - Simple Golf Score Card</title>
+  <title>Scoa.io</title>
   <link href="https://fonts.googleapis.com/css?family=Rock+Salt&text=0123456789" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="./js/jquery.js"></script>
   <script src="./js/moment.js"></script>
 
   <style>
@@ -18,9 +19,11 @@
     body {
       background-color: #3E6A36;
       background-image: url("./img/app-bg.jpg");
-      background-size: 100vh auto;
+      background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
+      background-attachment: fixed;
+      height: 100%;
       font-size: 16px;
     }
 
@@ -226,6 +229,18 @@
 
     });
 
+    var setBgImg = function (input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $("body").css("background-image", "url(" + e.target.result + ")");
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    };
+
   </script>
 
 </head>
@@ -341,6 +356,13 @@
       </tr>
 
     </table>
+
+    <footer>
+      <label for="inputBgImg" style="float:right;text-align: right;">
+        _
+        <input type='file' id="inputBgImg" style="display:none" onchange="setBgImg(this);" />
+      </label>
+    </footer>
 
   </div>
 
